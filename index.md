@@ -1,4 +1,4 @@
-Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
+# Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
 
 This is a 3 hour-Workshop on EDM and one application to real data in the
 [XLII Congreso Paulo Leal Ferreira]() organized by the students of the Instituto
