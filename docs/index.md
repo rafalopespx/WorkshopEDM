@@ -22,7 +22,7 @@ Kraenkel.
 
 ## 0\. [Installation instructions](docs/install.md)
 
-## 1\. [A Quick Tour through State Space Reconstruction](docs/Hands-on_Takens.html)
+## 1\. [A Quick Tour through State Space Reconstruction](Hands-on_Takens.html)
 
   - *on Mathbio* Download [the
     notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/takens/Hands-on%20Takens.Rmd)
@@ -33,7 +33,7 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/takens/Hands-on%20Takens.R).
 
-## 2\. [Simplex projection made simple](docs/simplex.html)
+## 2\. [Simplex projection made simple](simplex.html)
 
   - *on Mathbio* Download [the
     notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.Rmd)
@@ -44,7 +44,7 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/simplex/simplex.R).
 
-## 3\. [Convergent cross-mapping (CCM)](docs/ccm.html)
+## 3\. [Convergent cross-mapping (CCM)](ccm.html)
 
   - *on Mathbio* Download [the
     notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.Rmd)
@@ -55,5 +55,4 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/docs/ccm/ccm.R).
 
-## 4\. [Readings and resources](docs/reading_and_resources.html)
-
+## 4\. [Readings and resources](reading_and_resources.html)
