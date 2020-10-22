@@ -1,9 +1,10 @@
-# Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
+Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
 
 This is a 3 hour-Workshop on EDM and one application to real data in the
-Congreso Paulo Leal Ferreira organized by the students of the Instituto
-de Física Teórica - IFT
-(UNESP)
+[XLII Congreso Paulo Leal Ferreira]() organized by the students of the Instituto
+de Física Teórica - IFT (UNESP)
+  * [Site](http://professores.ift.unesp.br/congressoPauloLealFerreira/)
+  * [Slack](https://xliiicplf.slack.com/)
 
 ## Slides to the Workshop on Time series analysis by a causation criteria:
 
@@ -19,7 +20,7 @@ Brenno Cabella, Paulo Inácio Prado, Renato Mendes Coutinho, Marina
 Rillo, Rafael Lopes and Roberto
 Kraenkel.
 
-## 0\. [Installation instructions](install.md)
+## 0\. [Installation instructions](docs/install.md)
 
 ## 1\. [A Quick Tour through State Space Reconstruction](docs/Hands-on_Takens.html)
 
@@ -28,30 +29,30 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/takens/Hands-on%20Takens.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/rafalopespx/master/edmTutorials/docs/takens/Hands-on%20Takens.Rmd)
+    notebook](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/takens/Hands-on%20Takens.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/rafalopespx/master/edmTutorials/docs/takens/Hands-on%20Takens.R).
+    file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/takens/Hands-on%20Takens.R).
 
-## 2\. [Simplex projection made simple](simplex.html)
+## 2\. [Simplex projection made simple](docs/simplex.html)
 
   - *on Mathbio* Download [the
     notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.Rmd)
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/rafalopespx/master/edmTutorials/docs/simplex/simplex.Rmd)
+    notebook](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/simplex/simplex.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.R).
+    file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/simplex/simplex.R).
 
-## 3\. [Convergent cross-mapping (CCM)](ccm.html)
+## 3\. [Convergent cross-mapping (CCM)](docs/ccm.html)
 
   - *on Mathbio* Download [the
     notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.Rmd)
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/mathbio/rafalopespx/master/edmTutorials/docs/ccm/ccm.Rmd)
+    notebook](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/docs/ccm/ccm.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/mathbio/rafalopespx/master/edmTutorials/docs/ccm/ccm.R).
+    file](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/docs/ccm/ccm.R).
 
-## 4\. [Readings and resources](reading_and_resources.html)
+## 4\. [Readings and resources](docs/reading_and_resources.html)
