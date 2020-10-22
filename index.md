@@ -1,6 +1,3 @@
-READ me
-================
-
 # Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
 
 This is a 3 hour-Workshop on EDM and one application to real data in the
