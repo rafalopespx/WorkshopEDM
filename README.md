@@ -22,7 +22,7 @@ Brenno Cabella, Paulo Inácio Prado, Renato Mendes Coutinho, Marina
 Rillo, Rafael Lopes and Roberto
 Kraenkel.
 
-## 0\. [Installation instructions](install.md)
+## 0\. [Installation instructions](docs/install.md)
 
 ## 1\. [A Quick Tour through State Space Reconstruction](docs/Hands-on_Takens.html)
 
