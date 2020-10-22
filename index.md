@@ -1,37 +1,60 @@
-## Welcome to GitHub Pages
+READ me
+================
 
-You can use the [editor on GitHub](https://github.com/rafalopespx/WorkshopEDM/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This is a 3 hour-Workshop on EDM and one application to real data in the
+Congreso Paulo Leal Ferreira organized by the students of the Instituto
+de Física Teórica - IFT
+(UNESP)
 
-### Markdown
+## Slides to the Workshop on Time series analysis by a causation criteria:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+  - Day 1: Takens Theorem and its consequences
+  - Day 2: Simplex projection
+  - Day 3: Real data, real problems
 
-```markdown
-Syntax highlighted code block
+-----
 
-# Header 1
-## Header 2
-### Header 3
+This is a series of tutorials for the [School on Physics Applications in
+Biology](http://www.ictp-saifr.org/?page_id=15616) of 2018, created by
+Brenno Cabella, Paulo Inácio Prado, Renato Mendes Coutinho, Marina
+Rillo, Rafael Lopes and Roberto
+Kraenkel.
 
-- Bulleted
-- List
+## 0\. [Installation instructions](install.md)
 
-1. Numbered
-2. List
+## 1\. [A Quick Tour through State Space Reconstruction](docs/Hands-on_Takens.html)
 
-**Bold** and _Italic_ and `Code` text
+  - *on Mathbio* Download [the
+    notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/takens/Hands-on%20Takens.Rmd)
+    or the [R
+    file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/takens/Hands-on%20Takens.R).
+  - *Here* Download [the
+    notebook](https://raw.githubusercontent.com/rafalopespx/master/edmTutorials/docs/takens/Hands-on%20Takens.Rmd)
+    or the [R
+    file](https://raw.githubusercontent.com/rafalopespx/master/edmTutorials/docs/takens/Hands-on%20Takens.R).
 
-[Link](url) and ![Image](src)
-```
+## 2\. [Simplex projection made simple](simplex.html)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+  - *on Mathbio* Download [the
+    notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.Rmd)
+    or the [R
+    file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.R).
+  - *Here* Download [the
+    notebook](https://raw.githubusercontent.com/rafalopespx/master/edmTutorials/docs/simplex/simplex.Rmd)
+    or the [R
+    file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.R).
 
-### Jekyll Themes
+## 3\. [Convergent cross-mapping (CCM)](ccm.html)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rafalopespx/WorkshopEDM/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+  - *on Mathbio* Download [the
+    notebook](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.Rmd)
+    or the [R
+    file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.R).
+  - *Here* Download [the
+    notebook](https://raw.githubusercontent.com/mathbio/rafalopespx/master/edmTutorials/docs/ccm/ccm.Rmd)
+    or the [R
+    file](https://raw.githubusercontent.com/mathbio/rafalopespx/master/edmTutorials/docs/ccm/ccm.R).
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## 4\. [Readings and resources](reading_and_resources.html)
