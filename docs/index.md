@@ -29,9 +29,9 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/takens/Hands-on%20Takens.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/takens/Hands-on%20Takens.Rmd)
+    notebook](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/takens/Hands-on%20Takens.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/takens/Hands-on%20Takens.R).
+    file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/takens/Hands-on%20Takens.R).
 
 ## 2\. [Simplex projection made simple](simplex.html)
 
@@ -40,9 +40,9 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/simplex/simplex.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/simplex/simplex.Rmd)
+    notebook](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/simplex/simplex.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/docs/simplex/simplex.R).
+    file](https://raw.githubusercontent.com/rafalopespx/main/edmTutorials/simplex/simplex.R).
 
 ## 3\. [Convergent cross-mapping (CCM)](ccm.html)
 
@@ -51,8 +51,8 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/docs/ccm/ccm.Rmd)
+    notebook](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/ccm/ccm.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/docs/ccm/ccm.R).
+    file](https://raw.githubusercontent.com/mathbio/rafalopespx/main/edmTutorials/ccm/ccm.R).
 
 ## 4\. [Readings and resources](reading_and_resources.html)
