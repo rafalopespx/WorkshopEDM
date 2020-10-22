@@ -1,7 +1,7 @@
 # Introduction to `rEDM`: Empirical Dynamics Modeling in R: a crash course
 
 This is a 3 hour-Workshop on EDM and one application to real data in the
-[XLII Congreso Paulo Leal Ferreira]() organized by the students of the Instituto
+[XLII Congreso Paulo Leal Ferreira](http://professores.ift.unesp.br/congressoPauloLealFerreira/) organized by the students of the Instituto
 de Física Teórica - IFT (UNESP)
   * [Site](http://professores.ift.unesp.br/congressoPauloLealFerreira/)
   * [Slack](https://xliiicplf.slack.com/)
@@ -51,8 +51,8 @@ Kraenkel.
     or the [R
     file](https://raw.githubusercontent.com/mathbio/edmTutorials/master/ccm/ccm.R).
   - *Here* Download [the
-    notebook](https://raw.githubusercontent.com/mathbio/rafalopespx/WorkshopEDM/main/edmTutorials/ccm/ccm.Rmd)
+    notebook](https://raw.githubusercontent.com/rafalopespx/WorkshopEDM/main/edmTutorials/ccm/ccm.Rmd)
     or the [R
-    file](https://raw.githubusercontent.com/mathbio/rafalopespx/WorkshopEDM/main/edmTutorials/ccm/ccm.R).
+    file](https://raw.githubusercontent.com/rafalopespx/WorkshopEDM/main/edmTutorials/ccm/ccm.R).
 
 ## 4\. [Readings and resources](reading_and_resources.html)
