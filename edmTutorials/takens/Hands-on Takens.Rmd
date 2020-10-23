@@ -1,8 +1,8 @@
 ---
 title: "A Quick Tour through State Space Reconstruction"
-subtitle: "Tutorial 1 of The Short Course 'An Introduction to Empirical Dynamics Modelling', ICTP SAIRF"
+subtitle: "Tutorial 1 of The Short Course 'An Introduction to Empirical Dynamics Modelling'"
 author: "Brenno Cabella, Paulo Inácio Prado, Renato Coutinho, Marina Rillo, Rafael Lopes, Roberto Kraenkel"
-date: "ICTP SAIFR, School on Physics Applications in Biology, January 2018"
+date: "ICTP SAIFR, IFT - UNESP, XLII Congresso Paulo Leal Ferreira, October 2020"
 output:
          rmdformats::readthedown:
          self_contained: true
@@ -291,6 +291,8 @@ and how to solve them?
 which can help you understand the problem regarding small values of $\tau$:
 
 ```{r abline, eval=FALSE}
+plot(x_1 ~ x, data=df4, type="l",
+     xlab = "X", ylab = "X(t + tau)" )
 abline(0,1, col="red")
 ```
 
@@ -335,7 +337,7 @@ library(scatterplot3d)
 ## 3D plot
 scatterplot3d(x = df2$x, y = df2$x_1, z = df2$x_2,
               type = "l", color="grey", lwd = 0.5,
-              xlab = "x(t)", ylab = "x(t+tau)", zlab = "x(t + 2 tau)")
+              xlab = "x(t)", ylab = "x(t+tau)", zlab = "x(t + 2 tau)", box = FALSE)
 ```
 
 If the package is not available in your local R installation

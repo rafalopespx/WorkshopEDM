@@ -1,8 +1,8 @@
 ---
 title: "Convergent Cross Mapping (CCM)"
-subtitle: "School on Physics Applications in Biology, January 2018"
+subtitle: "Tutorial 3 of the Short Course 'An Introduction to Empirical Dynamics Modelling', ICTP SAIFR"
 author: "Brenno Cabella, Roberto Kraenkel, Renato Coutinho, Paulo Inácio Prado, Rafael Lopes"
-date: "`r format(Sys.time(), '%d de %B de %Y')`"
+date: "ICTP SAIFR, IFT - UNESP, XLII Congresso Paulo Leal Ferreira, October 2020"
 output:
          rmdformats::readthedown:
          self_contained: true
@@ -135,7 +135,7 @@ both variables using the simplex function (see the tutorial about
 ```{r optimal embeddings X}
 options(warn = -1)
 simplex_X<-simplex(X,silent=T)
-plot(simplex_X$rho,type='o', ylab = "Forecast Skill (rho)",
+plot(as.numeric(rho) ~ E, data = simplex_X, type='b', ylab = "Forecast Skill (rho)",
      xlab="Embedding Dimension (E)")
 E_star_X<-which.max(simplex_X$rho)
 print(paste('E*(X) =',E_star_X))
@@ -146,7 +146,7 @@ prediction skill $\rho$, is two.
 
 ```{r optimal embeddings Y}
 simplex_Y<-simplex(Y,silent=T)
-plot(simplex_Y$rho,type='o', ylab = "Forecast Skill (rho)",
+plot(as.numeric(rho) ~ E, data = simplex_Y, type='b', ylab = "Forecast Skill (rho)",
      xlab="Embedding Dimension (E)")
 E_star_Y<-which.max(simplex_Y$rho)
 print(paste('E*(Y) =',E_star_Y))
@@ -246,17 +246,18 @@ states of $Y$. We can then compare the predicted and observed:
 lib <- c(1, NROW(Shadow_MXY))
 block_lnlp_output_XY <- block_lnlp(Shadow_MXY, lib = lib, pred = lib, columns = c("X",
  "X_1"), target_column = "Y", stats_only = FALSE, first_column_time = TRUE)
-observed_all_Y <- block_lnlp_output_XY$model_output[[1]]$obs
-predicted_all_Y <- block_lnlp_output_XY$model_output[[1]]$pred
+observed_all_Y <- block_lnlp_output_XY$model_output$Observations
+predicted_all_Y <- block_lnlp_output_XY$model_output$Predictions
 pred_obs_Y<-as.data.frame(cbind(predicted_all_Y,observed_all_Y)) #
 colnames(pred_obs_Y)<-c('Predicted Y','Observed Y')
-head(pred_obs_Y)
+head(pred_obs_Y[-c(1,2),])
 ```
 
 For the case of $Y(t=70)$ we saw above, we find:
 ```{r predicted y}
-
-pred_obs_Y[(predictor-2),]
+## Just taking first two rows ##
+pred_obs_Y <- pred_obs_Y[-c(1,2),]
+pred_obs_Y[(predictor-4),]
 
 ```
 
@@ -273,11 +274,10 @@ fit_YX<-lm(predicted_all_Y ~ observed_all_Y)
 plot_range <- range(c(observed_all_Y, predicted_all_Y), na.rm = TRUE)
 plot(observed_all_Y,predicted_all_Y, xlim = plot_range, ylim = plot_range, xlab = "Observed Y",
 ylab = "Predicted Y")
-#abline(fit_YX$coefficients[1],fit_YX$coefficients[2])
 abline(0,1,lty=2)
-legend(x = "bottomright", legend = paste('r =',round(cor(observed_all_Y, predicted_all_Y)*100)/100),inset = 0.02,col = 'black')
-observed_pred_Y<-observed_all_Y[predictor-2]
-predicted_pred_Y<-predicted_all_Y[predictor-2]
+legend(x = "bottomright", legend = paste('r =', round(fit_YX$coefficients[2], 2)),inset = 0.02,col = 'black')
+observed_pred_Y<-observed_all_Y[predictor-4]
+predicted_pred_Y<-predicted_all_Y[predictor-4]
 points(observed_pred_Y,predicted_pred_Y,col='red',pch=16,cex=1.2)
 ```
 
@@ -335,10 +335,11 @@ $M_X$, obtaining the predicted value $\tilde{X}(t)$.
 lib<-lib <- c(1, NROW(Shadow_MXY))
 block_lnlp_output_YX <- block_lnlp(Shadow_MXY, lib = lib, pred = lib, columns = c("Y", "Y_1"),
                                    target_column = "X", stats_only = FALSE, first_column_time = TRUE)
-observed_all_X <- block_lnlp_output_YX$model_output[[1]]$obs
-predicted_all_X <- block_lnlp_output_YX$model_output[[1]]$pred
+observed_all_X <- block_lnlp_output_YX$model_output$Observations
+predicted_all_X <- block_lnlp_output_YX$model_output$Predictions
 pred_obs_X<-as.data.frame(cbind(predicted_all_X,observed_all_X))
 colnames(pred_obs_X)<-c('Predicted X','Observed X')
+pred_obs_X <- pred_obs_X[-c(1,2),]
 head(pred_obs_X)
 ```
 
@@ -351,10 +352,8 @@ fit_XY<-lm(predicted_all_X ~ observed_all_X)
 plot_range <- range(c(observed_all_X, predicted_all_X), na.rm = TRUE)
 plot(observed_all_X, predicted_all_X, xlim = plot_range, ylim = plot_range,
      xlab = "Observed X", ylab = "Predicted X")
-#abline(fit_XY$coefficients[1],fit_XY$coefficients[2])
 abline(0,1,lty=2)
-legend(x = "bottomright", legend = paste('r =',round(cor(observed_all_X,predicted_all_X)*100)/100),
-       inset = 0.02,col = 'black')
+legend(x = "bottomright", legend = paste('r =',round(fit_XY$coefficients[2], 2)), inset = 0.02,col = 'black')
 observed_pred_X<-observed_all_X[predictor-2]
 predicted_pred_X<-predicted_all_X[predictor-2]
 points(observed_pred_X,predicted_pred_X,col='red',pch=16,cex=1.2)
@@ -397,15 +396,11 @@ Y_xmap_X<- ccm(XY, E = 2, lib_column = "Y", target_column = "X",
                lib_sizes = seq(10, 130, by = 10), num_samples = 100, random_libs = TRUE,
                replace = TRUE)
 
-# mean values
-X_xmap_Y_means <- ccm_means(X_xmap_Y)
-Y_xmap_X_means <- ccm_means(Y_xmap_X)
-
 # plot graphs
-plot(X_xmap_Y_means$lib_size, pmax(0, X_xmap_Y_means$rho), type = "l", col = "red",
+plot(X_xmap_Y$LibSize, pmax(0, X_xmap_Y$`X:Y`), type = "l", col = "red",
      main='Two Species', xlab = "Library Size (L)",
      ylab = "Cross Map Skill (Pearson rho)", ylim = c(0,1))
-lines(Y_xmap_X_means$lib_size, pmax(0, Y_xmap_X_means$rho), col = "blue")
+lines(Y_xmap_X$LibSize, pmax(0, Y_xmap_X$`Y:X`), col = "blue")
 legend(x = "topleft", legend = c("X_xmap_Y", "Y_xmap_X"), col = c("red", "blue"),
        cex=1.1,lwd=2, inset = 0.02)
 ```
