@@ -223,9 +223,9 @@ Código para fazer atrasos:
 
 ```r
 *source("https://raw.githubusercontent.com/mathbio/edmTutorials/master/utilities/make_block.R")
-*X_lagged&lt;-make_block(block = data.frame(lorentz_X$X), max_lag = 3, tau = 5)
+*X_lag&lt;-make_block(block = data.frame(lorentz_X$X), max_lag = 3)
 knitr::kable(
-* head(X_lagged, 5),
+* head(X_lag, 5),
   format = 'html')
 ```
 
@@ -234,8 +234,8 @@ knitr::kable(
   &lt;tr&gt;
    &lt;th style="text-align:right;"&gt; time &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; lorentz_X.X &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; lorentz_X.X_5 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; lorentz_X.X_10 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lorentz_X.X_1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lorentz_X.X_2 &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
@@ -248,26 +248,26 @@ knitr::kable(
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.0951063 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.1826561 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0951063 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.2656028 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.1826561 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0951063 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.3464812 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2656028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.1826561 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

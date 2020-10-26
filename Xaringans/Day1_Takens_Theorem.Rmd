@@ -216,9 +216,9 @@ knitr::kable(
 Código para fazer atrasos:
 ```{r echo=TRUE}
 source("https://raw.githubusercontent.com/mathbio/edmTutorials/master/utilities/make_block.R") #<<
-X_lagged<-make_block(block = data.frame(lorentz_X$X), max_lag = 3, tau = 5) #<<
+X_lag<-make_block(block = data.frame(lorentz_X$X), max_lag = 3) #<<
 knitr::kable(
-  head(X_lagged, 5), #<<
+  head(X_lag, 5), #<<
   format = 'html')
 ```
 ---
@@ -226,6 +226,7 @@ knitr::kable(
 Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 --
 ```{r echo=FALSE, out.width="70%", fig.align='center'}
+X_lagged<-make_block(block = data.frame(lorentz_X$X), max_lag = 3, tau = 5) #<<
 library(scatterplot3d)
 lorentz_lagged_3d<-scatterplot3d(X_lagged$lorentz_X.X, 
                                  X_lagged$lorentz_X.X_5,
