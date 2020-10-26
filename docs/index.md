@@ -8,8 +8,8 @@ de Física Teórica - IFT (UNESP)
 
 ## Slides to the Workshop on Time series analysis by a causation criteria:
 
-  - [Day 1](Day1_Takens_Theorem.html): Takens Theorem and its consequences
-  - [Day 2](Day2_Simplex_projection.html): Simplex projection
+  - [Day 1](Xaringans/Day1_Takens_Theorem.html): Takens Theorem and its consequences
+  - [Day 2](Xaringans/Day2_Simplex_projection.html): Simplex projection
   - Day 3: Real data, real problems
 
 -----
