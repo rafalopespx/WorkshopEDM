@@ -22,23 +22,28 @@ class: center, middle, inverse, title-slide
 layout: true
 
 
+background-image:url("logo-IFT.png")
+background-position: 5% 100%
+background-size: 10%
 
-
-
-
----
-class: right
-
-# Find me at
-##### email: rafael.lp.silva@unesp.br
-##### Twitter: rafalpx
-##### github: rafalopespx
-.pull.left[
-&lt;img src="profile_pick.jpeg", style = "width: 40%"/&gt;]
 ---
 class: left
 
-# Motivação
+## Find me at
+
+.left-column[
+
+##### email: rafael.lp.silva@unesp.br
+##### Twitter: [@rafalpx](twitter.com/rafalpx)
+##### github: [rafalopespx](github.io/rafalopespx)
+]
+.pull-right[
+  ![profile](profile_pick.jpeg)
+]
+---
+class: left
+
+## Motivação
 
 Como determinar se duas séries temporais se relacionam?
 --
@@ -46,7 +51,7 @@ Como determinar se duas séries temporais se relacionam?
 
 ---
 
-# Sistemas Dinâmicos
+## Sistemas Dinâmicos
 
 --
 Podemos sempre pensar qualquer série temporal como resultado de um regra do tipo:
@@ -55,13 +60,13 @@ Podemos sempre pensar qualquer série temporal como resultado de um regra do tip
 Onde `\(X_1\)` é uma função de seu passo anterior
 ---
 
-# Sistemas Dinâmicos
+## Sistemas Dinâmicos
 
 --
 Se continuamos com essa regra temos `$$X_2=F(X_1)=F(F(X_0))=F^2(X_0)$$` e assim por diante, de forma geral:
 `$$X_n=F^n(X_0)$$`
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 --
 Um primeiro modelo matemático que incorpora essa ideia é o modelo de *Lotka-Volterra*:
@@ -75,32 +80,32 @@ $$
 Primeiro modelo a descrever o ciclo de presas e predadores
 Sabemos que aqui a causa é clara, `\(x\)` é predado por `\(y\)`
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 Quando integramos essas equações encontremos o seguinte:
 --
 &lt;img src="img/Rplot03.png" width="85%" style="display: block; margin: auto;" /&gt;
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 Uma outra forma de olhar essa dinâmica é através de um espaço-de-fase:
 --
 &lt;img src="img/Rplot05.png" width="85%" style="display: block; margin: auto;" /&gt;
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 Conforme alteramos os parâmetros e as condições iniciais de podemos encontrar diferentes **trajetórias**
 --
 &lt;img src="img/Rplot08.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
-# Atratores
+## Atratores
 
 Qualquer conjunto **trajetórias** no espaço-de-fase para um longo período de tempo, chamaremos de **atratores**
 --
 &lt;img src="img/Rplot10.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
 
-# Recapitulando
+## Recapitulando
 
 * Qualquer série temporal pode ser entendida como uma regra de sucessão do tipo `\(X_n = F^n(X_0)\)`
 
@@ -110,7 +115,7 @@ Qualquer conjunto **trajetórias** no espaço-de-fase para um longo período de 
 
 ---
 
-# Reconstrução de Atratores
+## Reconstrução de Atratores
 
 O sistema de *Lorentz* é um sistema que apresenta um atrator, ele é resultado da resolução das equações:
 --
@@ -124,13 +129,14 @@ $$
 $$
 ---
 
-# Reconstrução de Atratores
+## Reconstrução de Atratores
 
 Cada equação expressa uma série temporal para o sistema, então temos:
 --
+
 &lt;img src="img/lorentzts.png" width="75%" style="display: block; margin: auto;" /&gt;
 ---
-# Reconstrução de Atratores
+## Reconstrução de Atratores
 
 * Porém nem sempre conhecemos todas as **variáveis** de um sistema completamente
 
@@ -138,7 +144,7 @@ Cada equação expressa uma série temporal para o sistema, então temos:
 
 * A resposta é sim, através do **teorema de Takens** 
 ---
-# Teorema de Takens
+## Teorema de Takens
 
 Considere uma variedade `\(M\)` de dimensão `\(m\)` e `\(2m+1\)` funções observação do tipo, `\(x_k:M\rightarrow\mathbb{R}\)`, sendo elas, uma série temporal do sistema e as outras seus 2m atrasos, então:
 
@@ -149,26 +155,26 @@ Considere uma variedade `\(M\)` de dimensão `\(m\)` e `\(2m+1\)` funções obse
 
 Ou seja, `\(\Phi\)` é uma representação válida de `\(M\)` num espaço euclidiano de `\(E=2m+1\)` dimensões, e que conserva todas suas características topológicas bem como a sua **dinâmica**. `\(E\)` é a dimensão de **embedding**.
 ---
-# Teorema de Takens
+## Teorema de Takens
 
 --
 
-* De forma simples, qualquer sistema dinâmico pode ser reconstruído, baste que se tenha uma **série temporal** desse sistema e faça-se tantos atrasos quanto sejam necessários. 
+* De forma simples, qualquer sistema dinâmico pode ser reconstruído, basta que se tenha uma **série temporal** desse sistema e faça-se tantos atrasos quanto sejam necessários. 
 
 --
 
 * Para **mergulhar** essa dinâmica num espaço euclidiano, que de deve ter `\(2m+1\)` dimensões, onde `\(m\)` é a dimensão original do espaço que será reconstruindo.
 
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 
 --
-Se só tivermos a série do `\(X\)` no sistema de *Lorentz*, com o *teorema de Takens* podemos reconstruir o sistema todo, e sua *dinâmica*
+Se só tivermos a série do `\(X\)` no sistema de *Lorentz*, com o **teorema de Takens** podemos reconstruir o sistema todo, e sua **dinâmica**
 --
 
 &lt;img src="Day1_Takens_Theorem_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 
 --
 Data frame de duas colunas:
@@ -213,10 +219,8 @@ knitr::kable(
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
-
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 
 --
 Código para fazer atrasos:
@@ -272,12 +276,12 @@ knitr::kable(
 &lt;/tbody&gt;
 &lt;/table&gt;
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 --
 &lt;img src="Day1_Takens_Theorem_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ---
-# Consequências do Teorema
+## Consequências do Teorema
 
 --
 
@@ -286,14 +290,14 @@ Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 
 * Se duas **variedades-sombra** mapeiam-se mutuamente elas pertencem ao mesmo sistema dinâmico
 ---
-# Consequências do Teorema
+## Consequências do Teorema
 
 Questões:
 --
 
 * Como determinar o tanto de **atrasos** necessários a reconstrução?
 
-* Como determinar se duas **variedades** se mapeiam?
+* Como determinar se duas variedades se **mapeiam**?
 ---
 
 class: center

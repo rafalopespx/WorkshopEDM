@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Day 2 - Simplex Projection</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rafael Lopes" />
+    <meta name="date" content="2020-10-26" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Day 2 - Simplex Projection
+## made simple
+### Rafael Lopes
+### IFT, Unesp
+### 2020-10-26
+
+---
+
+layout: true
+
+
+background-image:url("logo-IFT.png")
+background-position: 5% 100%
+background-size: 10%
+
+---
+class: left
+
+## Find me at
+
+.left-column[
+
+##### email: rafael.lp.silva@unesp.br
+##### Twitter: [@rafalpx](twitter.com/rafalpx)
+##### github: [rafalopespx](github.io/rafalopespx)
+]
+.pull-right[
+  ![profile](profile_pick.jpeg)
+]
+---
+## Recapitulando
+
+* Qualquer série temporal pode ser escrita na forma `\(X_n=F^n(X_0)\)`
+
+* Qualquer sistema dinâmico tem um **espaço-de-fase**
+
+* O **Teorema de Takens** permitir reconstruir espaços-de-fase a partir de uma única série e seus **atrasos**
+
+* Duas **variedades-sombras** que se mapeiam mutuamente, pertencem ao mesmo sistema dinâmico
+
+---
+## Questões
+
+--
+
+* Como determinar o tanto de **atrasos** necessários a reconstrução?
+
+* Como determinar se duas variedades se **mapeiam**?
+--
+.center[
+  Projeção **Simplex** (Hoje)
+
+  CCM ou **Convergent Cross Mapping** (Amanhã)
+  ]
+---
+## Projeção Simplex
+
+--
+Uma forma de dar uma previsão de curto prazo para uma série temporal é a através de uma projeção simplex, dada uma série temporal:
+--
+&lt;img src="img/Rplot23.png" width="75%" style="display: block; margin: auto;" /&gt;
+---
+## Projeção Simplex
+
+--
+Procuramos o mesmo padrão de logo antes do fim da séries em outros momentos da série, com isso temos:
+&lt;img src="img/Rplot24.png" width="75%" style="display: block; margin: auto;" /&gt;
+---
+## Projeção Simplex
+
+--
+Com esses padrões olhamos os pontos seguintes, eles nos darão uma ideia do que acontece após esse padrão:
+&lt;img src="img/Rplot25.png" width="75%" style="display: block; margin: auto;" /&gt;
+---
+## Projeção Simplex
+
+--
+Com esses padrões olhamos os pontos seguintes, eles nos darão uma ideia do que acontece após esse padrão:
+&lt;img src="img/Rplot26.png" width="75%" style="display: block; margin: auto;" /&gt;
+---
+## Projeção Simplex
+
+--
+Através de uma média ponderada desses padrões podemos estimar o próximo ponto da série, numa fórmula:
+$$
+\hat{X}(t+h) = \sum^{E+1}_{i=1}w_iX_i(t+h)
+$$
+--
+
+Ou seja nossa estimativa `\(\hat{X}\)` será uma média ponderada dos pontos `\(X_i\)` imediatamente após o padrão
+---
+## Projeção Simplex
+
+--
+Outra forma de visualizar a projeção **Simplex** é através da seguinte ideia, no espaço-de-fase:
+&lt;img src="img/simplexextractedf.jpeg" width="75%" style="display: block; margin: auto;" /&gt;
+---
+## Seleção de *Embedding*
+
+--
+Para selecionar a dimensão adequada ao **Embedding** contabilizamos a correlação entre o predito e o observado, numa fórmula
+
+$$
+`\begin{equation*}
+  \rho = \rho_{X,\hat{X}} = \frac{\mathrm{cov}(X(t),\hat{X})}{\sigma_{X}\sigma_{\hat{X}}} \label{rhosimplex}
+\end{equation*}`
+$$
+Onde `\(\rho\)` é um valor entre 0 e 1, `\(\mathrm{cov}\)` é a covariância e `\(\sigma\)`s são os desvios padrão
+---
+## Seleção de *Embedding*
+
+Geramos duas séries simples, como abaixo:
+
+```r
+## Two vectors to store data
+X &lt;- c()
+Y &lt;- c()
+## Initial values
+X[1] &lt;- 0.1
+Y[1] &lt;- 0.3
+X[2] &lt;- 0.3
+Y[2] &lt;- 3.78*Y[1] - 3.78*Y[1]^2
+## Iterate the dynamics 150 time steps
+for(i in 3:150){
+*   X[i] &lt;- 3.77*X[i-1] - 3.77*X[i-1]^2 - 0.85*Y[i-1]*X[i-1] - 0.5*X[i-2]
+*   Y[i] &lt;- 3.78*Y[i-1] - 3.78*Y[i-1]^2
+}
+```
+---
+## Seleção de *Embedding*
+
+--
+plotando a série:
+
+```r
+plot(X, xlab="Time", ylab="X", type="l", lty=3)
+```
+
+&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+## Seleção de *Embedding*
+
+Testamos o `\(\rho\)` para diferentes dimensões de **embedding**:
+
+```r
+library(rEDM)
+*find.emb &lt;- simplex(time_series = X, E = 1:10)
+head(find.emb)
+```
+
+```
+##   E tau tp nn num_pred       rho        mae       rmse      perc        p_val const_pred_num_pred const_pred_rho
+## 1 1  -1  1  2      150 0.2000798 0.07909574  0.1031616 0.9933333 0.0064962628                 150     -0.3307049
+## 2 2  -1  1  3      149 0.7434791 0.04234975 0.05900197 0.9932886 0.0000000001                 149     -0.3883729
+## 3 3  -1  1  4      148 0.9220358 0.02387621 0.03445819 0.9932432 0.0000000001                 148      -0.380579
+## 4 4  -1  1  5      147 0.9035336 0.02466196 0.03766469 0.9931973 0.0000000001                 147     -0.3904401
+## 5 5  -1  1  6      146 0.9004385 0.02732305 0.03900681 0.9931507 0.0000000001                 146        -0.3857
+## 6 6  -1  1  7      145 0.8682037 0.03212827 0.04410303 0.9931034 0.0000000001                 145     -0.3886794
+##   const_pred_mae const_pred_rmse const_pred_perc const_p_val
+## 1      0.1242725        0.145133       0.9933333   0.9999871
+## 2      0.1237608       0.1446916       0.9932886   0.9999997
+## 3       0.122975       0.1438352       0.9932432   0.9999995
+## 4      0.1235692       0.1442959       0.9931973   0.9999997
+## 5      0.1229624       0.1437227       0.9931507   0.9999996
+## 6      0.1228083       0.1437128       0.9931034   0.9999996
+```
+---
+## Seleção de *Embedding*
+.pull-left[
+
+```r
+plot(as.numeric(rho) ~ E, 
+     data=find.emb, 
+     type="b",
+     xlab = "Embedding dimensions",
+     ylab = expression(paste("Forecast skill (",rho,")",sep="")))
+points(y = find.emb$rho[which.max(find.emb$rho)],
+       x = find.emb$E[which.max(find.emb$rho)], 
+       col = "red", 
+       pch = 19, 
+       size = 3)
+```
+]
+
+.pull-right[
+&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+## Predições
+
+--
+Agora com a dimensão ótima de **embedding** vamos realizar predições:
+
+```r
+*predE3 &lt;- simplex(time_series = X, E = 3, stats_only = FALSE)
+names(predE3)
+```
+
+```
+## [1] "stats"        "model_output"
+```
+--
+
+
+```r
+fits &lt;- predE3$model_output[[1]]
+head(fits)
+```
+
+```
+##   Index Observations Predictions Pred_Variance Const_Predictions
+## 1     3    0.5392810         NaN           NaN               NaN
+## 2     4    0.5030702   0.3636169  8.193049e-03         0.5392810
+## 3     5    0.2915131   0.3533368  2.930746e-03         0.5030702
+## 4     6    0.4366629   0.4492918  1.441837e-05         0.2915131
+## 5     7    0.4564548   0.4841492  2.783205e-04         0.4366629
+## 6     8    0.5577898   0.5034417  5.362669e-03         0.4564548
+```
+---
+
+## Predições
+
+Plotando a predição
+.pull-left[
+
+```r
+plot(Predictions ~ Index, 
+     data = fits, type = "l", 
+     col = "blue", lwd=3,
+     xlab="Time", ylab="X")
+lines(Observations ~ Index, 
+      data = fits, 
+      col=grey.colors(1, alpha=0.25), 
+      lwd = 6)
+legend("topright", 
+       c("Observed", "Predicted"), 
+       lty=1, lwd=c(6,3),
+       col=c(grey.colors(1, alpha=0.25), 
+             "blue"),bty="n")
+```
+]
+
+.pull-right[
+&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+## Recapitulando
+
+* Com a a projeção **Simplex** podemos determinar a dimensão de **embedding** para reconstruir a dinâmica
+
+* A dimensão será o máximo da correlação entre o predito e o observado, a predição será feita com uma projeçaõ **Simplex**
+
+* Com isso já podemos dar boas predições para o sistema
+
+
+
+---
+# Obrigado!
+
+## Referências:
+
+* Materiais e slides: [rafalopespx.github.io/WorkshopEDM/](http://rafalopespx.github.io/WorkshopEDM/)
+
+&lt;!-- * Vídeos do [YouTube](http://www.youtube.com/watch?v=fevurdpiRYg&amp;list=PL-SSmlAMhY3bnogGTe2tf7hpWpl508pZZ) sobre o Teorema de Takens. --&gt;
+
+* Canal do [Slack](https://app.slack.com/client/T01BJETR8S3/C01CXH8H9KM) para discussão, dúvidas, etc.
+
+* Tutorial Hands-on Takens Theorem [Extra](https://rafalopespx.github.io/WorkshopEDM/Hands-on_Takens.html)
+
+* Tutorial Simplex projection made it simple [Extra](https://rafalopespx.github.io/WorkshopEDM/simplex.html)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

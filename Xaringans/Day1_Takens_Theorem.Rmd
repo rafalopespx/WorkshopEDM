@@ -29,27 +29,28 @@ duo_accent(
   text_font_google   = google_font("Roboto Condensed", "300", "300i"),
   code_font_google   = google_font("Ubuntu Mono"), text_font_size = "30px")
 ```
+background-image:url("logo-IFT.png")
+background-position: 5% 100%
+background-size: 10%
 
-
-```{r xaringan-logo, include = FALSE}
-xaringanExtra::use_logo(image_url = "img/logo-IFT.png", 
-                        link_url = "https://www.ift.unesp.br",
-                        position = xaringanExtra::css_position(bottom = "1em", left = "1em"))
-```
-
----
-class: right
-
-# Find me at
-##### email: rafael.lp.silva@unesp.br
-##### Twitter: rafalpx
-##### github: rafalopespx
-.pull.left[
-<img src="profile_pick.jpeg", style = "width: 40%"/>]
 ---
 class: left
 
-# Motivação
+## Find me at
+
+.left-column[
+
+##### email: rafael.lp.silva@unesp.br
+##### Twitter: [@rafalpx](twitter.com/rafalpx)
+##### github: [rafalopespx](github.io/rafalopespx)
+]
+.pull-right[
+  ![profile](profile_pick.jpeg)
+]
+---
+class: left
+
+## Motivação
 
 Como determinar se duas séries temporais se relacionam?
 --
@@ -59,7 +60,7 @@ include_graphics("img/Rplotcausas.png")
 
 ---
 
-# Sistemas Dinâmicos
+## Sistemas Dinâmicos
 
 --
 Podemos sempre pensar qualquer série temporal como resultado de um regra do tipo:
@@ -68,13 +69,13 @@ $$X_1 = F(X_0)$$
 Onde $X_1$ é uma função de seu passo anterior
 ---
 
-# Sistemas Dinâmicos
+## Sistemas Dinâmicos
 
 --
 Se continuamos com essa regra temos $$X_2=F(X_1)=F(F(X_0))=F^2(X_0)$$ e assim por diante, de forma geral:
 $$X_n=F^n(X_0)$$
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 --
 Um primeiro modelo matemático que incorpora essa ideia é o modelo de *Lotka-Volterra*:
@@ -88,7 +89,7 @@ $$
 Primeiro modelo a descrever o ciclo de presas e predadores
 Sabemos que aqui a causa é clara, $x$ é predado por $y$
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 Quando integramos essas equações encontremos o seguinte:
 --
@@ -96,7 +97,7 @@ Quando integramos essas equações encontremos o seguinte:
 include_graphics("img/Rplot03.png")
 ```
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 Uma outra forma de olhar essa dinâmica é através de um espaço-de-fase:
 --
@@ -104,7 +105,7 @@ Uma outra forma de olhar essa dinâmica é através de um espaço-de-fase:
 include_graphics("img/Rplot05.png")
 ```
 ---
-# Dinâmica de Populações
+## Dinâmica de Populações
 
 Conforme alteramos os parâmetros e as condições iniciais de podemos encontrar diferentes **trajetórias**
 --
@@ -112,7 +113,7 @@ Conforme alteramos os parâmetros e as condições iniciais de podemos encontrar
 include_graphics("img/Rplot08.png")
 ```
 ---
-# Atratores
+## Atratores
 
 Qualquer conjunto **trajetórias** no espaço-de-fase para um longo período de tempo, chamaremos de **atratores**
 --
@@ -121,7 +122,7 @@ include_graphics("img/Rplot10.png")
 ```
 ---
 
-# Recapitulando
+## Recapitulando
 
 * Qualquer série temporal pode ser entendida como uma regra de sucessão do tipo $X_n = F^n(X_0)$
 
@@ -131,7 +132,7 @@ include_graphics("img/Rplot10.png")
 
 ---
 
-# Reconstrução de Atratores
+## Reconstrução de Atratores
 
 O sistema de *Lorentz* é um sistema que apresenta um atrator, ele é resultado da resolução das equações:
 --
@@ -145,15 +146,16 @@ $$
 $$
 ---
 
-# Reconstrução de Atratores
+## Reconstrução de Atratores
 
 Cada equação expressa uma série temporal para o sistema, então temos:
 --
+
 ```{r echo=FALSE, out.width="75%", fig.align='center', fig.keep='first'}
 include_graphics("img/lorentzts.png")
 ```
 ---
-# Reconstrução de Atratores
+## Reconstrução de Atratores
 
 * Porém nem sempre conhecemos todas as **variáveis** de um sistema completamente
 
@@ -161,7 +163,7 @@ include_graphics("img/lorentzts.png")
 
 * A resposta é sim, através do **teorema de Takens** 
 ---
-# Teorema de Takens
+## Teorema de Takens
 
 Considere uma variedade $M$ de dimensão $m$ e $2m+1$ funções observação do tipo, $x_k:M\rightarrow\mathbb{R}$, sendo elas, uma série temporal do sistema e as outras seus 2m atrasos, então:
 
@@ -172,21 +174,21 @@ $$\Phi = (x(t), x(t-\tau), ..., x(t-2m\tau))$$
 
 Ou seja, $\Phi$ é uma representação válida de $M$ num espaço euclidiano de $E=2m+1$ dimensões, e que conserva todas suas características topológicas bem como a sua **dinâmica**. $E$ é a dimensão de **embedding**.
 ---
-# Teorema de Takens
+## Teorema de Takens
 
 --
 
-* De forma simples, qualquer sistema dinâmico pode ser reconstruído, baste que se tenha uma **série temporal** desse sistema e faça-se tantos atrasos quanto sejam necessários. 
+* De forma simples, qualquer sistema dinâmico pode ser reconstruído, basta que se tenha uma **série temporal** desse sistema e faça-se tantos atrasos quanto sejam necessários. 
 
 --
 
 * Para **mergulhar** essa dinâmica num espaço euclidiano, que de deve ter $2m+1$ dimensões, onde $m$ é a dimensão original do espaço que será reconstruindo.
 
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 
 --
-Se só tivermos a série do $X$ no sistema de *Lorentz*, com o *teorema de Takens* podemos reconstruir o sistema todo, e sua *dinâmica*
+Se só tivermos a série do $X$ no sistema de *Lorentz*, com o **teorema de Takens** podemos reconstruir o sistema todo, e sua **dinâmica**
 --
 
 ```{r echo=FALSE, out.width="50%", fig.align='center'}
@@ -198,7 +200,7 @@ ggplot(data = lorentz, aes(x=time, y=X))+
        y = "X")
 ```
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 
 --
 Data frame de duas colunas:
@@ -207,10 +209,8 @@ knitr::kable(
   head(lorentz_X), #<<
   format = 'html')
 ```
-
-
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 
 --
 Código para fazer atrasos:
@@ -222,7 +222,7 @@ knitr::kable(
   format = 'html')
 ```
 ---
-# Reconstrução na prática
+## Reconstrução na prática
 Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 --
 ```{r echo=FALSE, out.width="70%", fig.align='center'}
@@ -238,7 +238,7 @@ lorentz_lagged_3d<-scatterplot3d(X_lagged$lorentz_X.X,
                                  zlab = "X_10")
 ```
 ---
-# Consequências do Teorema
+## Consequências do Teorema
 
 --
 
@@ -247,14 +247,14 @@ lorentz_lagged_3d<-scatterplot3d(X_lagged$lorentz_X.X,
 
 * Se duas **variedades-sombra** mapeiam-se mutuamente elas pertencem ao mesmo sistema dinâmico
 ---
-# Consequências do Teorema
+## Consequências do Teorema
 
 Questões:
 --
 
 * Como determinar o tanto de **atrasos** necessários a reconstrução?
 
-* Como determinar se duas **variedades** se mapeiam?
+* Como determinar se duas variedades se **mapeiam**?
 ---
 
 class: center
