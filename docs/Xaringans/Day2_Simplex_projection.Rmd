@@ -37,7 +37,7 @@ background-size: 10%
 ---
 class: left
 
-## Find me at (Atualizar gráficos)
+## Find me at
 
 .left-column[
 
@@ -270,9 +270,6 @@ legend("topright", c("Observed", "Predicted"), lty=1, lwd=c(6,3),
 * A dimensão será o máximo da correlação entre o predito e o observado, a predição será feita com uma projeção **Simplex**
 
 * Com isso já podemos dar boas predições para o sistema
-
-
-
 ---
 # Obrigado!
 
