@@ -12,6 +12,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      ratio: '16:9'
 ---
 layout: true
 
@@ -20,6 +21,7 @@ options(htmltools.dir.version = FALSE)
 library(xaringanthemer)
 library(xaringanExtra)
 library(knitr)
+library(ggplot2)
 duo_accent(
   primary_color = "#A70000",
   secondary_color = "#ff0000",
@@ -54,7 +56,7 @@ class: left
 
 Como determinar se duas séries temporais se relacionam?
 --
-```{r plot1, echo=FALSE, out.width="75%"}
+```{r plot1, echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 include_graphics("img/Rplotcausas.png")
 ```
 
@@ -93,7 +95,7 @@ Sabemos que aqui a causa é clara, $x$ é predado por $y$
 
 Quando integramos essas equações encontremos o seguinte:
 --
-```{r echo=FALSE, out.width="85%", fig.align='center', fig.keep='first'}
+```{r echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 include_graphics("img/Rplot03.png")
 ```
 ---
@@ -101,7 +103,7 @@ include_graphics("img/Rplot03.png")
 
 Uma outra forma de olhar essa dinâmica é através de um espaço-de-fase:
 --
-```{r echo=FALSE, out.width="85%", fig.align='center', fig.keep='first'}
+```{r echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 include_graphics("img/Rplot05.png")
 ```
 ---
@@ -109,7 +111,7 @@ include_graphics("img/Rplot05.png")
 
 Conforme alteramos os parâmetros e as condições iniciais de podemos encontrar diferentes **trajetórias**
 --
-```{r echo=FALSE, out.width="80%", fig.keep='first'}
+```{r echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 include_graphics("img/Rplot08.png")
 ```
 ---
@@ -117,7 +119,7 @@ include_graphics("img/Rplot08.png")
 
 Qualquer conjunto **trajetórias** no espaço-de-fase para um longo período de tempo, chamaremos de **atratores**
 --
-```{r echo=FALSE, out.width="80%", fig.align='center', fig.keep='first'}
+```{r echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 include_graphics("img/Rplot10.png")
 ```
 ---
@@ -151,7 +153,7 @@ $$
 Cada equação expressa uma série temporal para o sistema, então temos:
 --
 
-```{r echo=FALSE, out.width="75%", fig.align='center', fig.keep='first'}
+```{r echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 include_graphics("img/lorentzts.png")
 ```
 ---
@@ -191,9 +193,9 @@ Ou seja, $\Phi$ é uma representação válida de $M$ num espaço euclidiano de 
 Se só tivermos a série do $X$ no sistema de *Lorentz*, com o **teorema de Takens** podemos reconstruir o sistema todo, e sua **dinâmica**
 --
 
-```{r echo=FALSE, out.width="50%", fig.align='center'}
+```{r echo=FALSE, out.height=400, out.width=600, fig.align='center'}
 lorentz_X<- read.csv("problem-time-series.csv")
-ggplot(data = lorentz, aes(x=time, y=X))+
+ggplot(data = lorentz_X, aes(x=time, y=X))+
   geom_line()+
   theme_bw()+
   labs(x = "Tempo",
@@ -225,7 +227,7 @@ knitr::kable(
 ## Reconstrução na prática
 Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 --
-```{r echo=FALSE, out.width="70%", fig.align='center'}
+```{r echo=FALSE, out.height=475, out.width=600, fig.align='center'}
 X_lagged<-make_block(block = data.frame(lorentz_X$X), max_lag = 3, tau = 5) #<<
 library(scatterplot3d)
 lorentz_lagged_3d<-scatterplot3d(X_lagged$lorentz_X.X, 
@@ -252,9 +254,9 @@ lorentz_lagged_3d<-scatterplot3d(X_lagged$lorentz_X.X,
 Questões:
 --
 
-* Como determinar o tanto de **atrasos** necessários a reconstrução?
+* Como determinar o tanto de **atrasos** necessários a reconstrução? (Day 2)
 
-* Como determinar se duas variedades se **mapeiam**?
+* Como determinar se duas variedades se **mapeiam**? (Day 3)
 ---
 
 class: center

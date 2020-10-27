@@ -4,7 +4,7 @@
     <title>Day 1 - Takens Theorem</title>
     <meta charset="utf-8" />
     <meta name="author" content="Rafael Lopes" />
-    <meta name="date" content="2020-10-26" />
+    <meta name="date" content="2020-10-27" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 ## and its Consequences
 ### Rafael Lopes
 ### IFT, Unesp
-### 2020-10-26
+### 2020-10-27
 
 ---
 
@@ -47,7 +47,7 @@ class: left
 
 Como determinar se duas séries temporais se relacionam?
 --
-&lt;img src="img/Rplotcausas.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplotcausas.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -84,25 +84,25 @@ Sabemos que aqui a causa é clara, `\(x\)` é predado por `\(y\)`
 
 Quando integramos essas equações encontremos o seguinte:
 --
-&lt;img src="img/Rplot03.png" width="85%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot03.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Dinâmica de Populações
 
 Uma outra forma de olhar essa dinâmica é através de um espaço-de-fase:
 --
-&lt;img src="img/Rplot05.png" width="85%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot05.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Dinâmica de Populações
 
 Conforme alteramos os parâmetros e as condições iniciais de podemos encontrar diferentes **trajetórias**
 --
-&lt;img src="img/Rplot08.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot08.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Atratores
 
 Qualquer conjunto **trajetórias** no espaço-de-fase para um longo período de tempo, chamaremos de **atratores**
 --
-&lt;img src="img/Rplot10.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot10.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 ---
 
 ## Recapitulando
@@ -134,7 +134,7 @@ $$
 Cada equação expressa uma série temporal para o sistema, então temos:
 --
 
-&lt;img src="img/lorentzts.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/lorentzts.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Reconstrução de Atratores
 
@@ -172,7 +172,7 @@ Ou seja, `\(\Phi\)` é uma representação válida de `\(M\)` num espaço euclid
 Se só tivermos a série do `\(X\)` no sistema de *Lorentz*, com o **teorema de Takens** podemos reconstruir o sistema todo, e sua **dinâmica**
 --
 
-&lt;img src="Day1_Takens_Theorem_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Day1_Takens_Theorem_files/figure-html/unnamed-chunk-6-1.png" width="600" height="400" style="display: block; margin: auto;" /&gt;
 ---
 ## Reconstrução na prática
 
@@ -279,7 +279,7 @@ knitr::kable(
 ## Reconstrução na prática
 Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 --
-&lt;img src="Day1_Takens_Theorem_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Day1_Takens_Theorem_files/figure-html/unnamed-chunk-9-1.png" width="600" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Consequências do Teorema
 
@@ -295,9 +295,9 @@ Reconstrução do **atrator** de *Lorentz*, ou **variedade-sombra**:
 Questões:
 --
 
-* Como determinar o tanto de **atrasos** necessários a reconstrução?
+* Como determinar o tanto de **atrasos** necessários a reconstrução? (Day 2)
 
-* Como determinar se duas variedades se **mapeiam**?
+* Como determinar se duas variedades se **mapeiam**? (Day 3)
 ---
 
 class: center
@@ -319,7 +319,8 @@ class: center
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

@@ -4,7 +4,7 @@
     <title>Day 2 - Simplex Projection</title>
     <meta charset="utf-8" />
     <meta name="author" content="Rafael Lopes" />
-    <meta name="date" content="2020-10-26" />
+    <meta name="date" content="2020-10-27" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 ## made simple
 ### Rafael Lopes
 ### IFT, Unesp
-### 2020-10-26
+### 2020-10-27
 
 ---
 
@@ -29,7 +29,7 @@ background-size: 10%
 ---
 class: left
 
-## Find me at
+## Find me at (Atualizar gráficos)
 
 .left-column[
 
@@ -149,7 +149,7 @@ plotando a série:
 plot(X, xlab="Time", ylab="X", type="l", lty=3)
 ```
 
-&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-7-1.png" width="50%" /&gt;
 ---
 ## Seleção de *Embedding*
 
@@ -196,7 +196,12 @@ points(y = find.emb$rho[which.max(find.emb$rho)],
 ]
 
 .pull-right[
-&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+```
+## Warning in plot.xy(xy.coords(x, y), type = type, ...): "size" não é um parâmetro gráfico
+```
+
+![](Day2_Simplex_projection_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
 ]
 ---
 ## Predições
@@ -254,7 +259,7 @@ legend("topright",
 ]
 
 .pull-right[
-&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+![](Day2_Simplex_projection_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 ]
 ---
 ## Recapitulando
@@ -287,7 +292,8 @@ legend("topright",
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

@@ -12,6 +12,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      ratio: '16:9'
 ---
 layout: true
 
@@ -36,7 +37,7 @@ background-size: 10%
 ---
 class: left
 
-## Find me at
+## Find me at (Atualizar gráficos)
 
 .left-column[
 
