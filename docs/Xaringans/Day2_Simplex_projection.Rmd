@@ -168,11 +168,21 @@ $$
 ---
 ## Seleção de *Embedding*
 
---
+.pull-left[
 plotando a série:
-```{r echo=TRUE, out.height=400, out.width=700, fig.align='center'}
-plot(X, xlab="Time", ylab="X", type="b", lty=3)
+```{r echo=TRUE, eval=FALSE}
+plot(X, xlab="Tempo", 
+     ylab="X", 
+     type="b", 
+     lty=3)
 ```
+]
+--
+.pull-right[
+```{r echo=FALSE, eval=TRUE, out.height=400, out.width=700, fig.align='center'}
+plot(X, xlab="Tempo", ylab="X", type="b", lty=3)
+```
+]
 ---
 ## Seleção de *Embedding*
 
