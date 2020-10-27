@@ -23,7 +23,7 @@ layout: true
 
 
 background-image:url("logo-IFT.png")
-background-position: 5% 100%
+background-position: 0% 100%
 background-size: 10%
 
 ---
@@ -71,25 +71,25 @@ class: left
 --
 Uma forma de dar uma previsão de curto prazo para uma série temporal é a através de uma projeção simplex, dada uma série temporal:
 --
-&lt;img src="img/Rplot23.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot23.png" width="700" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Projeção Simplex
 
 --
 Procuramos o mesmo padrão de logo antes do fim da séries em outros momentos da série, com isso temos:
-&lt;img src="img/Rplot24.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot24.png" width="700" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Projeção Simplex
 
 --
 Com esses padrões olhamos os pontos seguintes, eles nos darão uma ideia do que acontece após esse padrão:
-&lt;img src="img/Rplot25.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot25.png" width="700" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Projeção Simplex
 
 --
 Com esses padrões olhamos os pontos seguintes, eles nos darão uma ideia do que acontece após esse padrão:
-&lt;img src="img/Rplot26.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/Rplot26.png" width="700" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Projeção Simplex
 
@@ -106,7 +106,7 @@ Ou seja nossa estimativa `\(\hat{X}\)` será uma média ponderada dos pontos `\(
 
 --
 Outra forma de visualizar a projeção **Simplex** é através da seguinte ideia, no espaço-de-fase:
-&lt;img src="img/simplexextractedf.jpeg" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/simplexextractedf.jpeg" width="700" height="475" style="display: block; margin: auto;" /&gt;
 ---
 ## Seleção de *Embedding*
 
@@ -115,7 +115,7 @@ Para selecionar a dimensão adequada ao **Embedding** contabilizamos a correlaç
 
 $$
 `\begin{equation*}
-  \rho = \rho_{X,\hat{X}} = \frac{\mathrm{cov}(X(t),\hat{X})}{\sigma_{X}\sigma_{\hat{X}}} \label{rhosimplex}
+  \rho = \rho_{X,\hat{X}} = \frac{\mathrm{cov}(X,\hat{X})}{\sigma_{X}\sigma_{\hat{X}}} \label{rhosimplex}
 \end{equation*}`
 $$
 Onde `\(\rho\)` é um valor entre 0 e 1, `\(\mathrm{cov}\)` é a covariância e `\(\sigma\)`s são os desvios padrão
@@ -139,6 +139,15 @@ for(i in 3:150){
 *   Y[i] &lt;- 3.78*Y[i-1] - 3.78*Y[i-1]^2
 }
 ```
+--
+$$
+`\begin{equation*}
+  X_i = 3.77X_{i-1} - 3.77X_{i-1}^2 - 0.85Y_{i-1}X_{i-1} - 0.5X_{i-2} \\
+  Y_i = 3.78Y_{i-1} - 3.78Y_{i-1}^2
+  \label{eq2sp}
+\end{equation*}`
+$$
+
 ---
 ## Seleção de *Embedding*
 
@@ -146,37 +155,48 @@ for(i in 3:150){
 plotando a série:
 
 ```r
-plot(X, xlab="Time", ylab="X", type="l", lty=3)
+plot(X, xlab="Time", ylab="X", type="b", lty=3)
 ```
 
-&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-7-1.png" width="50%" /&gt;
+&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-7-1.png" width="700" height="400" style="display: block; margin: auto;" /&gt;
 ---
 ## Seleção de *Embedding*
 
 Testamos o `\(\rho\)` para diferentes dimensões de **embedding**:
+.pull-left[
 
 ```r
 library(rEDM)
 *find.emb &lt;- simplex(time_series = X, E = 1:10)
-head(find.emb)
+```
+]
+
+.pull-right[
+
+```r
+head(find.emb$rho, 6)
 ```
 
 ```
-##   E tau tp nn num_pred       rho        mae       rmse      perc        p_val const_pred_num_pred const_pred_rho
-## 1 1  -1  1  2      150 0.2000798 0.07909574  0.1031616 0.9933333 0.0064962628                 150     -0.3307049
-## 2 2  -1  1  3      149 0.7434791 0.04234975 0.05900197 0.9932886 0.0000000001                 149     -0.3883729
-## 3 3  -1  1  4      148 0.9220358 0.02387621 0.03445819 0.9932432 0.0000000001                 148      -0.380579
-## 4 4  -1  1  5      147 0.9035336 0.02466196 0.03766469 0.9931973 0.0000000001                 147     -0.3904401
-## 5 5  -1  1  6      146 0.9004385 0.02732305 0.03900681 0.9931507 0.0000000001                 146        -0.3857
-## 6 6  -1  1  7      145 0.8682037 0.03212827 0.04410303 0.9931034 0.0000000001                 145     -0.3886794
-##   const_pred_mae const_pred_rmse const_pred_perc const_p_val
-## 1      0.1242725        0.145133       0.9933333   0.9999871
-## 2      0.1237608       0.1446916       0.9932886   0.9999997
-## 3       0.122975       0.1438352       0.9932432   0.9999995
-## 4      0.1235692       0.1442959       0.9931973   0.9999997
-## 5      0.1229624       0.1437227       0.9931507   0.9999996
-## 6      0.1228083       0.1437128       0.9931034   0.9999996
+## $E1
+## [1] 0.2000798
+## 
+## $E2
+## [1] 0.7434791
+## 
+## $E3
+## [1] 0.9220358
+## 
+## $E4
+## [1] 0.9035336
+## 
+## $E5
+## [1] 0.9004385
+## 
+## $E6
+## [1] 0.8682037
 ```
+]
 ---
 ## Seleção de *Embedding*
 .pull-left[
@@ -196,12 +216,7 @@ points(y = find.emb$rho[which.max(find.emb$rho)],
 ]
 
 .pull-right[
-
-```
-## Warning in plot.xy(xy.coords(x, y), type = type, ...): "size" não é um parâmetro gráfico
-```
-
-![](Day2_Simplex_projection_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](Day2_Simplex_projection_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
 ]
 ---
 ## Predições
@@ -242,11 +257,11 @@ Plotando a predição
 .pull-left[
 
 ```r
-plot(Predictions ~ Index, 
+*plot(Predictions ~ Index,
      data = fits, type = "l", 
      col = "blue", lwd=3,
      xlab="Time", ylab="X")
-lines(Observations ~ Index, 
+*lines(Observations ~ Index,
       data = fits, 
       col=grey.colors(1, alpha=0.25), 
       lwd = 6)
@@ -259,14 +274,14 @@ legend("topright",
 ]
 
 .pull-right[
-![](Day2_Simplex_projection_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+&lt;img src="Day2_Simplex_projection_files/figure-html/unnamed-chunk-15-1.png" width="500" height="400" /&gt;
 ]
 ---
 ## Recapitulando
 
-* Com a a projeção **Simplex** podemos determinar a dimensão de **embedding** para reconstruir a dinâmica
+* Com a projeção **Simplex** podemos determinar a dimensão de **embedding** para reconstruir a dinâmica
 
-* A dimensão será o máximo da correlação entre o predito e o observado, a predição será feita com uma projeçaõ **Simplex**
+* A dimensão será o máximo da correlação entre o predito e o observado, a predição será feita com uma projeção **Simplex**
 
 * Com isso já podemos dar boas predições para o sistema
 
@@ -283,9 +298,9 @@ legend("topright",
 
 * Canal do [Slack](https://app.slack.com/client/T01BJETR8S3/C01CXH8H9KM) para discussão, dúvidas, etc.
 
-* Tutorial Hands-on Takens Theorem [Extra](https://rafalopespx.github.io/WorkshopEDM/Hands-on_Takens.html)
+* Tutorial Hands-on Takens Theorem [Day 1](https://rafalopespx.github.io/WorkshopEDM/Hands-on_Takens.html)
 
-* Tutorial Simplex projection made it simple [Extra](https://rafalopespx.github.io/WorkshopEDM/simplex.html)
+* Tutorial Simplex projection made it simple [Day 2](https://rafalopespx.github.io/WorkshopEDM/simplex.html)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

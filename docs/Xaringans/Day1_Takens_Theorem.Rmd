@@ -32,7 +32,7 @@ duo_accent(
   code_font_google   = google_font("Ubuntu Mono"), text_font_size = "30px")
 ```
 background-image:url("logo-IFT.png")
-background-position: 5% 100%
+background-position: 0% 100%
 background-size: 10%
 
 ---
