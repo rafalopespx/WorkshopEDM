@@ -6,15 +6,15 @@ institute: "IFT, Unesp"
 date: " `r Sys.Date()`"
 output:
   xaringan::moon_reader:
-  lib_dir: libs
-  css: xaringan-themer.css
-  nature:
-    highlightStyle: github
-    highlightLines: true
-    countIncrementalSlides: false
-    ratio: '16:9'
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
 ---
-  layout: true
+layout: true
 
 ```{r xaringan-themer, include = FALSE}
 options(htmltools.dir.version = FALSE)
@@ -32,10 +32,10 @@ duo_accent(
 ```
 background-image:url("logo-IFT.png")
 background-position: 0% 100%
-  background-size: 10%
+background-size: 10%
 
 ---
-  class: left
+class: left
 
 ## Find me at
 
@@ -49,99 +49,169 @@ background-position: 0% 100%
   ![profile](profile_pick.jpeg)
   ]
 ---
-  ## Recapitulando
+## Recapitulando
   
-  * Qualquer série temporal pode ser escrita na forma $X_n=F^n(X_0)$
+* O **Teorema de Takens** permitir reconstruir espaços-de-fase a partir de uma única série e seus **atrasos**
   
-  * Qualquer sistema dinâmico tem um **espaço-de-fase**
+* Com a projeção **simplex** temos um critério prático para determinar a dimensão de **embedding**
   
-  * O **Teorema de Takens** permitir reconstruir espaços-de-fase a partir de uma única série e seus **atrasos**
-  
-  * Duas **variedades-sombras** que se mapeiam mutuamente, pertencem ao mesmo sistema dinâmico
+* A dimensão de **embedding** é o máximo da correlação entre a predição realizada com uma parte da série como o observado numa outra parte da série, **Forecast Skill** ** $\rho$ **, ou a habilidade de predição
 
 ---
-  ## Questões
+## Questões
   
-  --
+--
   
-  * Como determinar o tanto de **atrasos** necessários a reconstrução?
+* Como determinar o tanto de **atrasos** necessários a reconstrução?
   
-  * Como determinar se duas variedades se **mapeiam**?
-  --
-  .center[
-    Projeção **Simplex** (Hoje)
-    
-    CCM ou **Convergent Cross Mapping** (Amanhã)
-    ]
+* Como determinar se duas variedades se **mapeiam**?
+--
+.center[
+Projeção **Simplex** (Ontem)
+  
+CCM ou **Convergent Cross Mapping** (Hoje)
+]
 ---
-  ## Projeção Simplex
+### Convergent Cross Mapping
   
-  --
-  Uma forma de dar uma previsão de curto prazo para uma série temporal é a através de uma projeção simplex, dada uma série temporal:
-  --
-  ```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
-include_graphics("img/Rplot23.png")
+Voltamos as séries do primeiro dia, como estabelecer uma relação de causalidade entre ela, se existir:
+--
+```{r echo=FALSE, out.height=450, out.width=700, fig.align='center'}
+include_graphics("img/Rplotcausas.png")
 ```
 ---
-  ## Projeção Simplex
-  
-  --
-  Procuramos o mesmo padrão de logo antes do fim da séries em outros momentos da série, com isso temos:
-  ```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
-include_graphics("img/Rplot24.png")
+### Convergent Cross Mapping
+
+Com as duas séries aplicamos o algoritmo do **Simplex** para acharmos a dimensão ótima de reconstruções, aqui no sistema de *Lorentz*:
+```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
+include_graphics("img/Variedade-sombra XY.png")
 ```
 ---
-  ## Projeção Simplex
+### Convergent Cross Mapping
   
-  --
-  Com esses padrões olhamos os pontos seguintes, eles nos darão uma ideia do que acontece após esse padrão:
-  ```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
-include_graphics("img/Rplot25.png")
+--
+* Com os atratores reconstruídos $M_X$ e $M_Y$, aplicamos a ideia do **Simplex**
+
+* Seguir pontos vizinhos, $Y_i$, e com o futuro deles dar uma estimativa, $\hat{X}$, para o futuro do ponto, $X_c$, que se quer predizer
+
+* Só que tudo isso é feito com a ideia de tentar predizer uma série, $Y(t)$, na outra, $X(t)$, por isso do nome **Cross Mapping**
+---
+### Convergent Cross Mapping
+  
+--
+Numa figura temos o seguinte:
+```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
+include_graphics("img/CCM.png")
 ```
 ---
-  ## Projeção Simplex
+### Convergent Cross Mapping
   
-  --
-  Com esses padrões olhamos os pontos seguintes, eles nos darão uma ideia do que acontece após esse padrão:
-  ```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
-include_graphics("img/Rplot26.png")
+--
+Numa fórmula temos:
+$$\hat{X}(t_i)|M_Y = \sum^{E+1}_{i=1}w_iX_i(t_i)$$
+--
+  
+Onde os pontos $X_i(t_i)$ são determinados pelos pontos vizinhos ao centro preditor, através do indíces temporais deles
+---
+### Convergent Cross Mapping
+  
+--
+Olhando lado a lado:
+.pull-left[
+$$\hat{X}(t_i)|M_Y = \sum^{E+1}_{i=1}w_iX_i(t_i)$$
+
+Novamente, os pontos $X_i$ são encontrados em $M_X$ através dos indíces temporais dos pontos $Y_i$ em $M_y$
+]
+
+.pull-right[
+```{r echo=FALSE, out.height=400, out.width=600, fig.align='center'}
+include_graphics("img/CCM.png")
 ```
+]
 ---
-  ## Projeção Simplex
+### Convergent Cross Mapping
   
-  --
-  Através de uma média ponderada desses padrões podemos estimar o próximo ponto da série, numa fórmula:
-  $$
-  \hat{X}(t+h) = \sum^{E+1}_{i=1}w_iX_i(t+h)
-$$
-  --
-  
-  Ou seja nossa estimativa $\hat{X}$ será uma média ponderada dos pontos $X_i$ imediatamente após o padrão
----
-  ## Projeção Simplex
-  
-  --
-  Outra forma de visualizar a projeção **Simplex** é através da seguinte ideia, no espaço-de-fase:
-  ```{r echo=FALSE, out.height=475, out.width=700, fig.align='center'}
-include_graphics("img/simplexextractedf.jpeg")
-```
----
-  ## Seleção de *Embedding*
-  
-  --
-  Para selecionar a dimensão adequada ao **Embedding** contabilizamos a correlação entre o predito e o observado, numa fórmula
+--
+Como no **Simplex** queremos saber se essa predição é razoável e novamente tiramos a correlação entre predito e observado, só que dessa vez a predição é feita de modo cruzado:
 
 $$
-  \begin{equation*}
-\rho = \rho_{X,\hat{X}} = \frac{\mathrm{cov}(X,\hat{X})}{\sigma_{X}\sigma_{\hat{X}}} \label{rhosimplex}
+\begin{equation*}
+\rho_{CCM} = \rho_{X(t),\hat{X}(t)|M_Y} = \frac{\mathrm{cov}(X(t),\hat{X}(t)|M_Y)}{\sigma_{X(t)}\sigma_{\hat{X}(t)|M_Y}}(L)
+\label{rhoCCM}
 \end{equation*}
 $$
-  Onde $\rho$ é um valor entre 0 e 1, $\mathrm{cov}$ é a covariância e $\sigma$s são os desvios padrão
+Porém aqui diferentemente do **Simplex** temos fazemos as predições de forma crescente, ou seja, vamos adicionando pontos que usamos de um atrator para predizer pontos do outro, chamamos a quantidade de pontos de **biblioteca**, $L$, ou seja, quanto de informação de um atrator usamos no outro
 ---
-  ## Seleção de *Embedding*
+### Convergent Cross Mapping
   
-  Geramos duas séries simples, como abaixo:
-  ```{r echo=TRUE}
+--
+Simplificando a notação temos:
+
+$$
+\begin{equation*}
+\rho_{CCM} = \rho_{X,\hat{X}} = \frac{\mathrm{cov}(X,\hat{X})}{\sigma_{X}\sigma_{\hat{X}}}(L)
+\label{rhoCCMsimple}
+\end{equation*}
+$$
+Se conforme aumentarmos a **biblioteca**, $L$, essa correlação **convergir** para um valor, e que seja acima da correlação simples entre as séries, atingimos o critério de **Causalidade**
+---
+### Convergent Cross Mapping
+
+--
+Resumindo o algoritmo:
+
+1. Selecionar a dimensão de **embedding** E , para a reconstrução de cada
+atrator.
+
+2. Com as **variedades-sombras**, $M_S$ , realizar a estimativa, $\hat{X}$ , de pontos
+de um atrator se utilizando do pontos do outro atrator, nosso casos predizer $M_X$ com $M_Y$
+
+3. Calcular a correlação entre o estimado e o observado, $\rho_{X,\hat{X}}$, ou o **mapeamento**
+
+4. Se a correlação **convergir** para um valor acima da correlação simples entre as séries, atingimos o critério de **causalidade**
+
+---
+### Convergent Cross Mapping
+
+--
+<small>
+.pull-left[
+Resumindo o algoritmo:
+
+1. **embedding** E , para a reconstrução de cada atrator.
+
+2. Com as **variedades-sombras**, $M_S$ , realizar a estimativa, predizer $M_X$ com $M_Y$
+
+3. correlação entre $M_Y$ e $M_X$, $\rho_{ccm}$, ou o **mapeamento**
+
+4. **convergir** para um valor, atingimos o critério de **causalidade**
+]
+
+.pull-right[
+```{r echo=FALSE, out.height=400, out.width=600, fig.align='center'}
+include_graphics("img/CCM_fig.png")
+```
+]
+---
+### Direção de Causalidade
+
+--
+* O critério de **causalidade** é a **convergência** da correlação $\rho_{ccm}$
+
+* Se a variedade-sombra $M_Y$ de $Y$ pode ser **mapeada** na
+variedade-sombra de $X$ , $M_X$ , então dizemos que há **causalidade** entre $X$ e
+$Y$
+
+* Dizemos ainda que a causa é então o $X$ e o efeito o $Y$, no sentido
+contrário do **mapeamento**, pois o efeito guarda informações de
+sua causa.
+
+---
+### CCM na prática
+
+Geramos duas séries simples, como abaixo:
+.pull-left[
+```{r echo=TRUE}
 ## Two vectors to store data
 X <- c()
 Y <- c()
@@ -152,135 +222,231 @@ X[2] <- 0.3
 Y[2] <- 3.78*Y[1] - 3.78*Y[1]^2
 ## Iterate the dynamics 150 time steps
 for(i in 3:150){
-  X[i] <- 3.77*X[i-1] - 3.77*X[i-1]^2 - 0.85*Y[i-1]*X[i-1] - 0.5*X[i-2] #<<
-  Y[i] <- 3.78*Y[i-1] - 3.78*Y[i-1]^2 #<<
+  X[i] <- 3.77*X[i-1] - 3.77*X[i-1]^2 - 0.9*Y[i-1]*X[i-1] - 0.5*X[i-2] #<<
+  Y[i] <- 3.82*Y[i-1] - 3.82*Y[i-1]^2 #<<
 }
+XY<-data.frame(X=X,Y=Y)
 ```
+]
 --
-  $$
-  \begin{equation*}
-X_i = 3.77X_{i-1} - 3.77X_{i-1}^2 - 0.85Y_{i-1}X_{i-1} - 0.5X_{i-2} \\
-Y_i = 3.78Y_{i-1} - 3.78Y_{i-1}^2
-\label{eq2sp}
-\end{equation*}
-$$
-  
-  ---
-  ## Seleção de *Embedding*
-  
-  --
-  plotando a série:
-  ```{r echo=TRUE, out.height=400, out.width=700, fig.align='center'}
-plot(X, xlab="Time", ylab="X", type="b", lty=3)
-```
----
-  ## Seleção de *Embedding*
-  
-  Testamos o $\rho$ para diferentes dimensões de **embedding**:
-  .pull-left[
-    ```{r echo=TRUE}
-    library(rEDM)
-    find.emb <- simplex(time_series = X, E = 1:10) #<<
-    ```
-    ]
-
 .pull-right[
-  ```{r echo=TRUE}
-  head(find.emb$rho, 6)
-  ```
-  ]
----
-  ## Seleção de *Embedding*
-  .pull-left[
-    ```{r echo=TRUE, eval=FALSE}
-    plot(as.numeric(rho) ~ E, 
-         data=find.emb, 
-         type="b",
-         xlab = "Embedding dimensions",
-         ylab = expression(paste("Forecast skill (",rho,")",sep="")))
-    points(y = find.emb$rho[which.max(find.emb$rho)],
-           x = find.emb$E[which.max(find.emb$rho)], 
-           col = "red", 
-           pch = 19, 
-           size = 3)
-    ```
-    ]
+```{r echo=FALSE, out.height=400, out.width=900, fig.align='center'}
+par(mfrow = c(2,1))
+plot(Y, xlab = "",type = "l", col = "red", ylab = "Y")
+plot(X, type = "l", col = "blue", ylab = "X", xlab = "time")
 
-.pull-right[
-  ```{r echo=FALSE, eval=TRUE, warning=FALSE}
-  plot(as.numeric(rho) ~ E, data=find.emb, type="b",
-       xlab = "Embedding dimensions",
-       ylab = expression(paste("Forecast skill (",rho,")",sep="")))
-  points(y = find.emb$rho[which.max(find.emb$rho)],
-         x = find.emb$E[which.max(find.emb$rho)], col = "red", pch = 19, size = 3)
-  ```
-  ]
----
-  ## Predições
-  
-  --
-  Agora com a dimensão ótima de **embedding** vamos realizar predições:
-  ```{r echo=TRUE}
-predE3 <- simplex(time_series = X, E = 3, stats_only = FALSE) #<<
-names(predE3)
 ```
---
+]
   
-  ```{r echo=TRUE}
-fits <- predE3$model_output[[1]]
-head(fits)
-```
 ---
-  
-  ## Predições
-  
-  Plotando a predição
+### CCM na prática
+
 .pull-left[
-  ```{r, eval=FALSE, echo=TRUE}
-  plot(Predictions ~ Index, #<<
-       data = fits, type = "l", 
-       col = "blue", lwd=3,
-       xlab="Time", ylab="X")
-  lines(Observations ~ Index, #<<
-        data = fits, 
-        col=grey.colors(1, alpha=0.25), 
-        lwd = 6)
-  legend("topright", 
-         c("Observed", "Predicted"), 
-         lty=1, lwd=c(6,3),
-         col=c(grey.colors(1, alpha=0.25), 
-               "blue"),bty="n")
-  ```
-  ]
+**Simplex** para o $X$
+```{r echo=TRUE}
+simplex_X<-simplex(X,silent=T)
+E_star_X<-which.max(simplex_X$rho)
+print(paste('E*(X) =',E_star_X))
+```
+]
 
 .pull-right[
-  ```{r, eval=TRUE, echo=FALSE, out.width=500, out.height=400}
-  plot(Predictions ~ Index, data = fits, type = "l", col = "blue", lwd=3,
-       xlab="Time", ylab="X")
-  lines(Observations ~ Index, data = fits, col=grey.colors(1, alpha=0.25), lwd = 6)
-  legend("topright", c("Observed", "Predicted"), lty=1, lwd=c(6,3),
-         col=c(grey.colors(1, alpha=0.25), "blue"),bty="n")
-  ```
-  ]
+```{r echo=TRUE, out.height=400, out.width=900, fig.align='center'}
+par(mfrow = c(1,1))
+plot(as.numeric(rho) ~ E, data = simplex_X, type='b', ylab = "Forecast Skill (rho)",
+     xlab="Embedding Dimension (E)")
+```
+]
 ---
-  ## Recapitulando
-  
-  * Com a projeção **Simplex** podemos determinar a dimensão de **embedding** para reconstruir a dinâmica
+### CCM na prática
 
-* A dimensão será o máximo da correlação entre o predito e o observado, a predição será feita com uma projeção **Simplex**
-  
-  * Com isso já podemos dar boas predições para o sistema
+.pull-left[
+**Simplex** para o $Y$
+```{r echo=TRUE}
+simplex_Y<-simplex(Y,silent=T)
+E_star_Y<-which.max(simplex_Y$rho)
+print(paste('E*(Y) =',E_star_Y))
+```
+]
+
+.pull-right[
+```{r echo=TRUE, out.height=400, out.width=900, fig.align='center'}
+par(mfrow = c(1,1))
+plot(as.numeric(rho) ~ E, data = simplex_Y, type='b', ylab = "Forecast Skill (rho)",
+     xlab="Embedding Dimension (E)")
+```
+]
 ---
-  # Obrigado!
+### CCM na prática
+
+--
+
+.pull-left[
+```{r echo=TRUE}
+# cross map from X to Y
+X_xmap_Y<- ccm(XY, 
+               E = E_star_X, #<<
+               lib_column = "X", #<<
+               target_column = "Y", #<<
+               lib_sizes = seq(10, 150, by = 5), 
+               # num_samples = 100, 
+               random_libs = TRUE,
+               replace = TRUE)
+# cross map from Y to X
+Y_xmap_X<- ccm(XY, 
+               E = E_star_Y, #<<
+               lib_column = "Y", #<<
+               target_column = "X", #<<
+               lib_sizes = seq(10, 150, by = 5), 
+               # num_samples = 100, 
+               random_libs = TRUE,
+               replace = TRUE)
+```
+]
+
+.pull-right[
+```{r echo=TRUE, out.height=380, out.width=700, fig.align='center'}
+# plot graphs
+plot(X_xmap_Y$`X:Y` ~ X_xmap_Y$LibSize, lwd = 3,type = "l", col = "red",xlab = "Library Size (L)", ylab = "Cross Map Skill", ylim = c(0,1))
+lines(Y_xmap_X$`Y:X` ~ Y_xmap_X$LibSize, col = "blue", lwd = 3, type = "l")
+legend(x = "topleft", legend = c("X_xmap_Y", "Y_xmap_X"), col = c("red", "blue"),cex=1.1,lwd=3, inset = 0.02)
+```
+]
+---
+### CCM na prática
+
+--
+<small>
+.pull-left[
+* Criamos séries temporais, $X$ e $Y$, com o **Simplex** descobrimos a dimensão de **embedding** de cada uma das śeries
+
+* Com essa dimensão $E$ reconstruímos seus atratores, e como esses atratores, $M_X$ e $M_X$, fizemos o **mapeamento** cruzado
+
+* Para o mapeamento que **convergiu** para um valor pudemos determinar a causa da série, no caso $Y$ causa $X$, e o mapeamento que **convergiu** foi o $X$ em $Y$
+]
+
+.pull-right[
+```{r echo=FALSE, out.height=400, out.width=800, fig.align='center'}
+# plot graphs
+plot(X_xmap_Y$`X:Y` ~ X_xmap_Y$LibSize, lwd = 3,type = "l", col = "red",xlab = "Library Size (L)", ylab = "Cross Map Skill", ylim = c(0,1))
+lines(Y_xmap_X$`Y:X` ~ Y_xmap_X$LibSize, col = "blue", lwd = 3, type = "l")
+legend(x = "topleft", legend = c("X_xmap_Y", "Y_xmap_X"), col = c("red", "blue"),cex=1.1,lwd=3, inset = 0.02)
+```
+]
+---
+# Obrigado!
   
-  ## Referências:
+### Referências:
   
-  * Materiais e slides: [rafalopespx.github.io/WorkshopEDM/](http://rafalopespx.github.io/WorkshopEDM/)
+* Materiais e slides: [rafalopespx.github.io/WorkshopEDM/](http://rafalopespx.github.io/WorkshopEDM/)
 
 <!-- * Vídeos do [YouTube](http://www.youtube.com/watch?v=fevurdpiRYg&list=PL-SSmlAMhY3bnogGTe2tf7hpWpl508pZZ) sobre o Teorema de Takens. -->
   
-  * Canal do [Slack](https://app.slack.com/client/T01BJETR8S3/C01CXH8H9KM) para discussão, dúvidas, etc.
+* Canal do [Slack](https://app.slack.com/client/T01BJETR8S3/C01CXH8H9KM) para discussão, dúvidas, etc.
 
 * Tutorial Hands-on Takens Theorem [Day 1](https://rafalopespx.github.io/WorkshopEDM/Hands-on_Takens.html)
 
 * Tutorial Simplex projection made it simple [Day 2](https://rafalopespx.github.io/WorkshopEDM/simplex.html)
+
+* Tutorial Convergent Cross Mapping [Day 3](https://rafalopespx.github.io/WorkshopEDM/ccm.html)
+
+---
+### Extra
+
+--
+Borboletas da tribo *Ithomiini*
+
+.pull-left[
+```{r echo=FALSE, out.height=300, out.width=500, fig.align='center', fig.cap="Macroanel tigrado, A – H.ninonia, B – M.polymnia, C – M.lysimnia, D – H.euclea"}
+include_graphics("img/macroanel-tigrado.png")
+```
+]
+
+.pull-right[
+```{r echo=FALSE, out.height=300, out.width=500, fig.align='center', fig.cap="Macroanel transparente, E – H.lavinia, F – I.agnosia, G – E.eupompe, H – M.c.salonina"}
+include_graphics("img/macroanel-transparente.png")
+```
+]
+---
+### Extra
+
+```{r echo=FALSE, out.height=500, out.width=900, fig.align='center'}
+include_graphics("img/Rplot222.png")
+```
+---
+### Extra
+
+```{r echo=FALSE, out.height=500, out.width=800, fig.align='center'}
+include_graphics("img/Rplot116.png")
+```
+---
+### Extra
+
+--
+Seleção de **embedding** para cada uma das séries de borboletas:
+.pull-left[
+```{r echo=FALSE, out.height=400, out.width=600, fig.align='center'}
+include_graphics("img/Rplot113p.png")
+```
+]
+
+.pull-right[
+```{r echo=FALSE, out.height=400, out.width=600, fig.align='center'}
+include_graphics("img/Rplot114p.png")
+```
+]
+---
+### Extra
+
+```{r echo=FALSE, out.height=500, out.width=900, fig.align='center'}
+include_graphics("img/Rplot232.png")
+```
+---
+### Extra
+
+```{r echo=FALSE, out.height=500, out.width=900, fig.align='center'}
+include_graphics("img/Rplot231.png")
+```
+---
+### Extra
+
+```{r echo=FALSE, out.height=500, out.width=900, fig.align='center'}
+include_graphics("img/Rplot230.png")
+```
+---
+### Extra
+
+```{r echo=FALSE, out.height=500, out.width=900, fig.align='center'}
+include_graphics("img/Rplot229.png")
+```
+
+---
+### Extra
+
+* De onde concluímos que o **Fotoperído** é um fator causador da dinâmica da maioria das espécies de borboletas da tribo *Ithomiini*
+
+* Podemos nos perguntar também se a há relação de causa entre essas borboletas, ou seja, se uma espécie afeta a dinâmica da outra também
+
+---
+### Extra
+
+<small>
+.pull-left[
+E há sim, fazendo todo o algoritmo do **Empirical Dynamic Modelling**, chegamos no seguinte, para cada espécie temos que realizar 7 **CCM**, contra todas as outra espécies da tribo, temos então que fazer 56 **CCM**
+
+**CCM** para a espécie *M. Polyminia* ao lado
+]
+
+.pull-right[
+```{r echo=FALSE, out.height=500, out.width=800, fig.align='center'}
+include_graphics("img/Rplot192.png")
+```
+]
+---
+### Extra
+
+Se colocarmos todas essa relações de causa numa rede temos o seguinte:
+
+```{r echo=FALSE, out.height=500, out.width=800, fig.align='center'}
+include_graphics("img/Rplot19.png")
+```
