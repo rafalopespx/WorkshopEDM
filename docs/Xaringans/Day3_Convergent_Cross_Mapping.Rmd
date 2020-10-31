@@ -423,10 +423,10 @@ include_graphics("img/Rplot229.png")
 ---
 ### Extra
 
-* De onde concluímos que o **Fotoperído** é um fator causador da dinâmica da maioria das espécies de borboletas da tribo *Ithomiini*
+* De onde concluímos que o **Fotoperíodo** é um fator causador da dinâmica da maioria das espécies de borboletas da tribo *Ithomiini*
 
 * Podemos nos perguntar também se a há relação de causa entre essas borboletas, ou seja, se uma espécie afeta a dinâmica da outra também
-
+  
 ---
 ### Extra
 
