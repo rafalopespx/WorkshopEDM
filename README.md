@@ -12,7 +12,7 @@ de Física Teórica - IFT (UNESP)
 
   - [Day 1](https://rafalopespx.github.io/WorkshopEDM/gh-pages/Xaringans/Day1_Takens_Theorem.html): Takens Theorem and its consequences
   - [Day 2](https://rafalopespx.github.io/WorkshopEDM/gh-pages/Xaringans/Day2_Simplex_projection.html): Simplex projection
-  - Day 3: Real data, real problems
+  - [Day 3](https://rafalopespx.github.io/WorkshopEDM/Xaringans/Day3_Convergent_Cross_Mapping.html): Real data, Real problems
 
 -----
 
