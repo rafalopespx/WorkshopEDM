@@ -12,6 +12,12 @@ de Física Teórica - IFT (UNESP)
   - [Day 2](Xaringans/Day2_Simplex_projection.html): Simplex projection
   - [Day 3](Xaringans/Day3_Convergent_Cross_Mapping.html): Real data, real problems
 
+## Videos of the Workshop
+
+  - [Day 1](https://www.youtube.com/watch?v=lgqsHX2mFAc) Takens Theorem
+  - [Day 2](https://www.youtube.com/watch?v=QdxpQtp_nHw) Simplex Projection
+  - [Day 3](https://www.youtube.com/watch?v=28nSdF8ZGHw) Real Data, Real Problems
+
 -----
 
 This is a series of tutorials for the [School on Physics Applications in
